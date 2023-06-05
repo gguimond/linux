@@ -1,0 +1,6 @@
+make defconfig
+make -j16
+make menuconfig
+make
+mkinitcpio --generate customImage.img
+qemu-system-x86_64 -kernel arch/x86/boot/bzImage -nographic -initrd customImage.img -append "console=ttyS0" -m 512 --enable-kvm -cpu host
